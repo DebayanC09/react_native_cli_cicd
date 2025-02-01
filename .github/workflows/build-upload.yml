@@ -51,4 +51,5 @@ jobs:
           npx firebase-tools appdistribution:distribute \
             android/app/build/outputs/apk/release/app-release.apk \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --testers "testers"
+            --groups testers \
+            --release-notes "New release update"
