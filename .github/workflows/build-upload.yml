@@ -14,15 +14,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (20.14.0)
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '20.14.0'
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Java & Gradle
+      - name: Install Java (OpenJDK 17)
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
@@ -50,6 +50,5 @@ jobs:
             --release-notes "This is the release note for the new version." \
             --testers "testers" \
             --token "$(echo $FIREBASE_CREDENTIALS | base64 --decode | jq -r .client_email)"
-
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
