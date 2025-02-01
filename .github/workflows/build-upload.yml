@@ -48,7 +48,7 @@ jobs:
           npx firebase-tools appdistribution:distribute \
             android/app/build/outputs/apk/release/app-release.apk \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --groups ${{ secrets.FIREBASE_TESTERS }} \
+            --testers "testers" \
             --token "$(echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode | jq -r .private_key)"
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
