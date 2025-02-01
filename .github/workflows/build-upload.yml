@@ -29,10 +29,13 @@ jobs:
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
 
-      - name: Decode Firebase Service Account
+      - name: Decode Firebase Service Account JSON
         run: echo "$FIREBASE_SERVICE_ACCOUNT" | base64 --decode > firebase-service-account.json
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: Set Firebase Credentials
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/firebase-service-account.json" >> $GITHUB_ENV
 
       - name: Grant execute permission to Gradle
         run: chmod +x ./android/gradlew
@@ -48,7 +51,4 @@ jobs:
           npx firebase-tools appdistribution:distribute \
             android/app/build/outputs/apk/release/app-release.apk \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --testers "testers" \
-            --token "$(echo $FIREBASE_SERVICE_ACCOUNT | base64 --decode | jq -r .private_key)"
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+            --testers "testers"
