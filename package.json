@@ -19,9 +19,9 @@
     "android:ProductionRelease": "npx react-native run-android --mode=productionRelease",
     "android:clean": "cd android && ./gradlew clean && cd ..",
     "android:bundle": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "android:apk:development": "yarn setDevelopment && yarn android:clean && yarn android:bundle && cd android && ./gradlew assembleDevelopmentRelease && cd ..",
-    "android:apk:uat": "yarn setUAT && yarn android:clean && yarn android:bundle && ./gradlew assembleUatRelease && cd ..",
-    "android:apk:production": "yarn setProduction && yarn android:clean && yarn android:bundle && cd android && ./gradlew assembleProductionRelease && cd .."
+    "android:apk:development": "npm run setDevelopment && npm run android:clean && npm run android:bundle && cd android && ./gradlew assembleDevelopmentRelease && cd ..",
+    "android:apk:uat": "npm run setUAT && npm run android:clean && npm run android:bundle && cd android && ./gradlew assembleUatRelease && cd ..",
+    "android:apk:production": "npm run setProduction && npm run android:clean && npm run android:bundle && cd android && ./gradlew assembleProductionRelease && cd .."
   },
   "dependencies": {
     "@react-native-firebase/app": "^21.7.1",
